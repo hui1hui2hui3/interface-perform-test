@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    div.table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th.col-md-4 label
+                    th.col-md-4 url
+                    th.col-md-1 method
+                    th.col-md-3 actions
+            tbody
+                for realurl in details 
+                    tr
+                        td= realurl.label
+                        td= realurl.url
+                        td= realurl.method
+                        td
+                            div.btn-group
+                                button.btn.btn-primary(type="button",title="run")
+                                    span.glyphicon.glyphicon-play-circle
+                                button.btn.btn-success(type="button",title="edit")
+                                    span.glyphicon.glyphicon-pencil
+                                button.btn.btn-warning(type="button",title="disable")
+                                    span.glyphicon.glyphicon-eye-close
+                                button.btn.btn-danger(type="button",title="delete")
+                                    span.glyphicon.glyphicon-remove

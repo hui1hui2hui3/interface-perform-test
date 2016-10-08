@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/javascripts/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/javascripts/jquery/dist/jquery.min.js')
+        script(src='/javascripts/bootstrap/dist/js/bootstrap.min.js')
+    body.container
+        header
+            nav.navbar.navbar-default
+                div.container-fluid
+                    div.navbar-header
+                        a.navbar-brand(href="#") Huis
+                    div.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/") Home
+        div.jumbotron
+            h1= title
+            p Welcome to #{title}
+            form(id="uploadForm",enctype="multipart/form-data",action="/upload",method="post")
+                input(type="file",name="jmxFile")
+                input(type="submit",value="Upload Jmx",name="submit")
+        block content
