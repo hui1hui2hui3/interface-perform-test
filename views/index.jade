@@ -1,26 +1,24 @@
 extends layout
 
 block content
-    for url in urls
-        table.table.table-striped
-            thead
+    table.table.table-striped
+        thead
+            tr
+                th.col-md-3 name
+                th.col-md-2 actions
+                th.col-md-7 result
+        tbody
+            for url in urls
                 tr
-                    th.col-md-1 name
-                    th.col-md-1 detail
-                    th.col-md-2 actions
-                    th.col-md-8 result
-            tbody
-                tr
-                    td= url.name 
-                    td
-                        a(href="/detail/#{url.name}") /detail/#{url.name}
+                    td #{url.name}.json
+                        | &nbsp;
+                        a(href="/detail/#{url.name}") 
+                            U detail
                     td
                         div.btn-group
                             button.btn.btn-primary.js-run-jmeter(title="run",data-url="#{url.name}",data-loading-text="<i class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></i>")
                                 span.glyphicon.glyphicon-play-circle
-                            a.btn.btn-info.js-analyze(title="analyze",data-url="#{url.name}",target="_blank",href="https://sense.blazemeter.com/gui/")
-                                span.glyphicon.glyphicon-barcode
-                            a.btn.btn-success.disabled.js-download(title="download",data-url="#{url.name}",href="/download/#{url.name}")
+                            a.btn.btn-success.disabled.js-download(title="download",data-url="#{url.name}",href="#")
                                 span.glyphicon.glyphicon.glyphicon-download-alt
                     td
                         pre.js-test-result(data-url="#{url.name}")

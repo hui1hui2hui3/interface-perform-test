@@ -15,7 +15,9 @@ var jmxReader = function() {
             }
             for (var i = 0, n = files.length; i < n; i++) {
                 var file = files[i];
-                if (file.indexOf('.jmx') > -1) {
+                var fileExtIndex = file.indexOf(".jmx");
+                if (fileExtIndex > -1) {
+                    file = file.substring(0,fileExtIndex);
                     jmxFiles[jmxFiles.length] = file;
                 }
             }
@@ -25,5 +27,8 @@ var jmxReader = function() {
         deferred.resolve(jmxFiles);
     }
     return deferred.promise;
+}
+jmxReader.reload = function(){
+    jmxFiles = []
 }
 module.exports = jmxReader;
