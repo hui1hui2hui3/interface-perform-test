@@ -28,6 +28,7 @@ app.use('/runJmeter', routes);
 app.use('/download', routes);
 app.use('/upload', routes);
 app.use('/jmxlists', routes);
+app.use('/urllists', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
