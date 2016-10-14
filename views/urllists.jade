@@ -1,8 +1,9 @@
 extends layout
 
 mixin showdetail(data,trclass,deepth)
+    -var idKey = Math.floor(Math.random() * (15 - 1300) + 1300)
     each urlObj,urlName in data
-        tr(class="#{trclass}",data-toggle="collapse",data-target="#detail#{urlName}",style="cursor: pointer;")
+        tr(class="#{trclass}",data-toggle="collapse",data-target="#detail#{idKey}#{deepth}#{urlName}",style="cursor: pointer;")
             td.col-md-4
                 h4 #{urlName}
             td.col-md-7=urlObj.obj.url
@@ -16,7 +17,7 @@ mixin showdetail(data,trclass,deepth)
                 else
                     span.label.label-default #{Object.keys(urlObj.childs).length}
         if Object.keys(urlObj.childs).length > 0
-            tr.collapse(id="detail#{urlName}")
+            tr.collapse(id="detail#{idKey}#{deepth}#{urlName}")
                 td(colspan=3)
                     table.table.table-bordered.table-hover
                         if deepth == 1
