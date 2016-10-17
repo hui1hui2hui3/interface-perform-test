@@ -4,19 +4,15 @@ var q = require('q');
 var urlJsonPath = './urljson/';
 var urlListsData = [];
 
-var urlJsonParser = function(){
-    var deferred = q.defer();
-    if(urlListsData.length > 0) {
-        deferred.resolve(urlListsData);
+var urlJsonParser = function() {
+    if (urlListsData.length > 0) {
+        return q(urlListsData);
     } else {
-        jsonParser(urlJsonPath).then(function(data){
+        return jsonParser(urlJsonPath).then(function(data) {
             urlListsData = data;
-            deferred.resolve(urlListsData);
-        },function(err){
-            deferred.reject(err);
-        })
+            return urlListsData;
+        });
     }
-    return deferred.promise;
 };
 
 module.exports = urlJsonParser;
