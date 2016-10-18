@@ -4,9 +4,9 @@ mixin showdetail(data,trclass,deepth)
     -var idKey = Math.floor(Math.random() * (15 - 1300) + 1300)
     each urlObj,urlName in data
         tr(class="#{trclass}",data-toggle="collapse",data-target="#detail#{idKey}#{deepth}#{urlName}",style="cursor: pointer;")
-            td.col-md-4
-                h4 #{urlName}
-            td.col-md-7=urlObj.obj.url
+            td.col-md-5
+                h4 #{urlObj.obj.name}
+            td.col-md-6=urlObj.obj.url
             td.col-md-1
                 if Object.keys(urlObj.childs).length > 10
                     span.label.label-danger #{Object.keys(urlObj.childs).length}
@@ -41,15 +41,17 @@ block content
             div.tab-pane.active(id="pandect")
                 h2
                     b URL总数:#{urllists.length}
-                table.table.table-striped
+                table.table.table-striped.table-hover
                     thead
                         tr
+                            th.col-md-1 index
                             th.col-md-4 name
                             th.col-md-6 url
-                            th.col-md-2 isAbs
+                            th.col-md-1 isAbs
                     tbody
-                        for url in urllists
+                        each url,i in urllists
                             tr
+                                td=i+1
                                 td=url.name
                                 td=url.url
                                 td=url.abstract
