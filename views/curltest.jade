@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    form
+        div.row
+            div.col-md-offset-2.col-md-6
+                input.form-control(type="text",name="url",placeholder="请输入完整要测试的url")
+            div.col-md-1
+                button.btn.btn-default(type="submit") 点击测试
+    if testResults.length > 0
+        table.table.table-striped
+            thead
+                tr
+                    th.col-md-3 url
+                    th.col-md-1 ssl(s)
+                    th.col-md-1 Connect(s)
+                    th.col-md-1 DNS(s)
+                    th.col-md-1 pretransfer(s)
+                    th.col-md-1 redirect(s)
+                    th.col-md-1 Start(s)
+                    th.col-md-1 Total(s)
+                    th.col-md-1 Size(byte)
+                    th.col-md-1 Speed(byte/s)
+            tbody
+                tr
+                    td=testUrl
+                    for data in testResults
+                        td=data
+            
+    
