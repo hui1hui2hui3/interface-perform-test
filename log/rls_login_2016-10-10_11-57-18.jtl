@@ -1,0 +1,7 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,grpThreads,allThreads,Latency,IdleTime
+1476071839922,1305,https://apirls.512ks.cn/user,200,OK,Thread Group 1-1,text,true,,2869,1,1,1304,0
+1476071841419,476,https://apirls.512ks.cn/hospitals/3/logoStatusAndUrl,200,OK,Thread Group 1-1,text,true,,717,1,1,476,0
+1476071841896,477,https://apirls.512ks.cn/currentAnnouncement,200,OK,Thread Group 1-1,,true,,438,1,1,477,0
+1476071842381,518,https://apirls.512ks.cn/train/commentMessages?pageNo=1&perPage=10&state=0,200,OK,Thread Group 1-1,text,true,,559,1,1,518,0
+1476071842900,486,https://apirls.512ks.cn/user/photo,200,OK,Thread Group 1-1,text,true,,653,1,1,486,0
+1476071843393,485,https://apirls.512ks.cn/hospitals/3/logoStatusAndUrl,200,OK,Thread Group 1-1,text,true,,717,1,1,485,0

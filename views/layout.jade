@@ -1,0 +1,42 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/javascripts/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/javascripts/jquery/dist/jquery.min.js')
+        script(src='/javascripts/bootstrap/dist/js/bootstrap.min.js')
+    body.container
+        header
+            nav.navbar.navbar-default
+                div.container-fluid
+                    div.navbar-header
+                        a.navbar-brand(href="#") Huis
+                    div.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/") Jmx JSON Lists
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/jmxlists") Jmx Lists
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/urllists") Url Lists
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/curltest") Curl Test Speed
+                        ul.nav.navbar-nav
+                            li
+                                a(target="_blank",href="https://sense.blazemeter.com/gui/") BlazeMeter Sense
+        div.jumbotron
+            h1= title
+            p Welcome to #{title}
+            form(id="uploadForm",enctype="multipart/form-data",action="/upload/#{uploadUrl}",method="post")
+                label.btn.btn-default.btn-file 选择#{uploadTitle}上传文件
+                    input(type="file",style="display: none",name="jmxFile",onchange='$("#upload-file-info").html($(this).val());$("#uploadZoom").show()')
+                | &nbsp;
+                div.well(id="uploadZoom",style="display: none")
+                    span.label.label-info(id="upload-file-info")
+                    | &nbsp;
+                    button.btn.btn-primary.btn-sm(type="submit",name="submit") 上传
+        block content

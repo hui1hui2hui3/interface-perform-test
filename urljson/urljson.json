@@ -1,0 +1,1931 @@
+[
+    {
+        "name": "",
+        "url": "^",
+        "views": null,
+        "abstract": true
+    },
+    {
+        "url": "/cheatingWarn:examId&:examRecId",
+        "loginRequired": false,
+        "loginRole": "common",
+        "params": {
+            "requireData": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/exam/cheatingWarn.html",
+                "controller": "cheatingWarnController"
+            }
+        },
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "cheatingWarn"
+    },
+    {
+        "url": "/print-no-header",
+        "loginRole": "admin",
+        "views": {
+            "": {
+                "templateUrl": "views/print/print.html"
+            }
+        },
+        "resolve": {
+            "loadPrint": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "print"
+    },
+    {
+        "url": "/Info/:paperId",
+        "loginRole": "admin",
+        "params": {
+            "type": null,
+            "backName": null,
+            "backState": null,
+            "data": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/print/paperInfo.html",
+                "controller": "paperInfoController"
+            }
+        },
+        "name": "print.paperInfo"
+    },
+    {
+        "url": "/emailHeader",
+        "loginRole": "common",
+        "templateUrl": "views/user/emailHeader.html",
+        "controller": "updateEmailController",
+        "resolve": {
+            "loadUser": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "emailHeader"
+    },
+    {
+        "url": "/emailChange",
+        "loginRole": "common",
+        "views": {
+            "": {
+                "templateUrl": "views/user/emailChange.html"
+            },
+            "@emailHeader.emailChang": {
+                "templateUrl": "views/user/updateEmail.html",
+                "controller": "updateEmailController"
+            }
+        },
+        "name": "emailHeader.emailChange"
+    },
+    {
+        "url": "/updateEmail?code",
+        "loginRole": "common",
+        "templateUrl": "views/user/updateEmail.html",
+        "controller": "updateEmailController",
+        "name": "emailHeader.emailChange.updateEmail"
+    },
+    {
+        "url": "/emailPrompt",
+        "loginRole": "common",
+        "templateUrl": "views/user/emailPrompt.html",
+        "controller": "updateEmailController",
+        "name": "emailHeader.emailChange.emailPrompt"
+    },
+    {
+        "url": "/emailFinish",
+        "loginRole": "common",
+        "templateUrl": "views/user/emailFinish.html",
+        "controller": "emailFinishController",
+        "resolve": {
+            "loadUser": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "emailFinish"
+    },
+    {
+        "url": "",
+        "abstract": true,
+        "views": {
+            "": {
+                "templateUrl": "views/main/main.html",
+                "controller": "mainController"
+            }
+        },
+        "resolve": {
+            "loadMain": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main"
+    },
+    {
+        "url": "/courses",
+        "abstract": true,
+        "loginRole": "admin",
+        "templateUrl": "views/courses/courses.html",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadCourses": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.courses"
+    },
+    {
+        "url": "/myCourses",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/myCourse/myCourses.html",
+        "controller": "myCoursesController",
+        "params": {
+            "curPage": null,
+            "selectedState": null
+        },
+        "name": "main.courses.myCourses"
+    },
+    {
+        "url": "/coursePublish/:courseId",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/myCourse/coursePublished.html",
+        "controller": "coursePublishController",
+        "params": {
+            "curPage": null,
+            "selectedState": null,
+            "startTime": null,
+            "endTime": null
+        },
+        "name": "main.courses.coursePublish"
+    },
+    {
+        "url": "/offLinePublish/:trainId",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/offLineTrain/offLinePublished.html",
+        "controller": "offLinePublishController",
+        "params": {
+            "curPage": null,
+            "duration": null,
+            "startTime": null
+        },
+        "name": "main.courses.offLinePublish"
+    },
+    {
+        "url": "/showSituation/?:courseId&:courseName",
+        "loginRole": "admin",
+        "params": {
+            "courseName": null
+        },
+        "templateUrl": "views/courses/myCourse/studySituation.html",
+        "controller": "studySituationController",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.courses.showSituation"
+    },
+    {
+        "url": "/offLine",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/offLineTrain/offLine.html",
+        "controller": "offLineController",
+        "name": "main.courses.offLine"
+    },
+    {
+        "url": "/createOffLine/:trainId",
+        "loginRole": "admin",
+        "params": {
+            "offLineData": null
+        },
+        "templateUrl": "views/courses/offLineTrain/createOffLine.html",
+        "controller": "createOffLineController",
+        "name": "main.courses.createOffLine"
+    },
+    {
+        "url": "/offLineSign/:trainId",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/offLineTrain/offLineSign.html",
+        "controller": "offLineSignController",
+        "name": "main.courses.offLineSign"
+    },
+    {
+        "url": "/offLinePreview",
+        "loginRole": "admin",
+        "params": {
+            "offLineData": null
+        },
+        "templateUrl": "views/courses/offLineTrain/offLinePreview.html",
+        "controller": "offLinePreviewController",
+        "name": "main.courses.offLinePreview"
+    },
+    {
+        "url": "/reports",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/reports/reports.html",
+        "controller": "reportsController",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.courses.reports"
+    },
+    {
+        "url": "/chart",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/reports/chartReports.html",
+        "controller": "chartReportsController",
+        "name": "main.courses.reports.chart"
+    },
+    {
+        "url": "/list",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/reports/listReports.html",
+        "controller": "listReportController",
+        "name": "main.courses.reports.list"
+    },
+    {
+        "url": "/createCourses/:courseId",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/myCourse/createCourse.html",
+        "controller": "createCourseController",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadMaterial": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.createCourses"
+    },
+    {
+        "url": "/coursePreview/:courseId",
+        "loginRole": "admin",
+        "views": {
+            "@main": {
+                "templateUrl": "views/courses/myCourse/coursePreview.html",
+                "controller": "coursePreviewController"
+            }
+        },
+        "params": {
+            "courseId": null,
+            "classId": null,
+            "curPage": null,
+            "selectedState": null,
+            "tabState": null
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadCourses": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.coursePreview"
+    },
+    {
+        "url": "/quiz/:classIndexId",
+        "params": {
+            "classIndexId": null
+        },
+        "loginRole": "admin",
+        "templateUrl": "views/courses/myCourse/classQuizPreview.html",
+        "name": "main.coursePreview.quiz"
+    },
+    {
+        "url": "/classPreview/:courseId",
+        "loginRole": "admin",
+        "views": {
+            "@main": {
+                "templateUrl": "views/courses/myCourse/courseClassPreview.html",
+                "controller": "classPreviewController"
+            }
+        },
+        "params": {
+            "curPage": null,
+            "selectedState": null
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadCourses": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.classPreview"
+    },
+    {
+        "url": "/class/:classId/study/:nodeId",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/myCourse/studyContent.html",
+        "name": "main.classPreview.studyContent"
+    },
+    {
+        "url": "/class/:classId/test",
+        "loginRole": "admin",
+        "templateUrl": "views/courses/myCourse/testPreview.html",
+        "controller": "testPreviewController",
+        "params": {
+            "testQuestionInfo": null
+        },
+        "name": "main.classPreview.classTest"
+    },
+    {
+        "url": "/exam",
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/exam.html",
+        "abstract": true,
+        "controller": "examController",
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.exam"
+    },
+    {
+        "url": "/examHistory",
+        "params": {
+            "requireData": null
+        },
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/examHistoryList.html",
+        "controller": "examHistoryController",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.exam.examHistory"
+    },
+    {
+        "url": "/wrongQuestions",
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/wrongQuestions.html",
+        "controller": "wrongQuestionsController",
+        "name": "main.exam.wrongQuestions"
+    },
+    {
+        "url": "/waitingExam",
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/waitingExam.html",
+        "controller": "examWaitingController",
+        "name": "main.exam.waitingExam"
+    },
+    {
+        "url": "/offLineExam",
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/offLineExam.html",
+        "controller": "offLineExamController",
+        "name": "main.exam.offLineExam"
+    },
+    {
+        "url": "/exercise",
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/exercise/exerciseList.html",
+        "controller": "exerciseListController",
+        "name": "main.exam.exercise"
+    },
+    {
+        "url": "/examReview/:examRecId",
+        "params": {
+            "previous": null,
+            "requireData": null
+        },
+        "loginRole": "common",
+        "templateUrl": "views/exam/examReview.html",
+        "controller": "examReviewController",
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.examReview"
+    },
+    {
+        "url": "/previousExam/:examId",
+        "params": {
+            "exam": null
+        },
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/previousExam.html",
+        "controller": "previousExamController",
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.previousExam"
+    },
+    {
+        "url": "/examInfo/:examId",
+        "params": {
+            "exam": null
+        },
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/examInfo.html",
+        "controller": "examInfoController",
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.examInfo"
+    },
+    {
+        "url": "/exam/:examId&:examRecId",
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/takeExamination.html",
+        "controller": "takeExaminationController",
+        "params": {
+            "requireData": null,
+            "exam": null,
+            "paperInfo": null
+        },
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.myExam"
+    },
+    {
+        "url": "/examFinish/:examId",
+        "params": {
+            "examResult": null
+        },
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/examFinish.html",
+        "controller": "examFinishController",
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.examFinish"
+    },
+    {
+        "url": "/exerciseStart",
+        "loginRole": "examinee",
+        "templateUrl": "views/exam/exercise/exercise.html",
+        "controller": "exerciseController",
+        "params": {
+            "practiceId": null,
+            "type": null
+        },
+        "resolve": {
+            "loadExam": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.exerciseStart"
+    },
+    {
+        "url": "/hospital",
+        "loginRole": "admin",
+        "views": {
+            "": {
+                "templateUrl": "views/hospital/hospital.html"
+            }
+        },
+        "resolve": {
+            "loadHospital": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.hospital"
+    },
+    {
+        "url": "/info",
+        "loginRole": "admin",
+        "views": {
+            "@main.hospital": {
+                "templateUrl": "views/hospital/info/info.html",
+                "controller": "hospitalInfoController"
+            }
+        },
+        "name": "main.hospital.info"
+    },
+    {
+        "url": "/hospInfo",
+        "loginRole": "admin",
+        "views": {
+            "@main.hospital": {
+                "templateUrl": "views/hospital/info/infoView.html",
+                "controller": "hospitalInfoController"
+            }
+        },
+        "name": "main.hospital.hospInfo"
+    },
+    {
+        "url": "/department",
+        "loginRole": "admin",
+        "abstract": "true",
+        "name": "main.hospital.department"
+    },
+    {
+        "url": "/info",
+        "loginRole": "admin",
+        "views": {
+            "@main.hospital": {
+                "templateUrl": "views/hospital/department/departmentInfo.html",
+                "controller": "departmentInfoController"
+            }
+        },
+        "name": "main.hospital.department.info"
+    },
+    {
+        "url": "/peopleList",
+        "loginRole": "admin",
+        "params": {
+            "group": null
+        },
+        "templateUrl": "views/hospital/department/peopleList.html",
+        "controller": "peopleListController",
+        "name": "main.hospital.department.info.peopleList"
+    },
+    {
+        "url": "/authCode",
+        "loginRole": "admin",
+        "params": {
+            "group": null
+        },
+        "templateUrl": "views/hospital/department/authCode.html",
+        "controller": "authCodeController",
+        "name": "main.hospital.department.info.authCode"
+    },
+    {
+        "url": "/nurse/:userId/:isModify/:isNurseManage",
+        "loginRole": "admin",
+        "params": {
+            "group": null
+        },
+        "views": {
+            "@main.hospital": {
+                "templateUrl": "views/hospital/department/nurseInfo.html",
+                "controller": "nurseInfoController"
+            }
+        },
+        "resolve": {
+            "loadUser": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.hospital.department.nurse"
+    },
+    {
+        "url": "/groupManage",
+        "loginRole": "admin",
+        "views": {
+            "@main.hospital": {
+                "templateUrl": "views/hospital/groupManage/groupManage.html",
+                "controller": "departManageController"
+            }
+        },
+        "name": "main.hospital.groupManage"
+    },
+    {
+        "url": "/labelManage",
+        "loginRole": "admin",
+        "abstract": "true",
+        "name": "main.hospital.labelManage"
+    },
+    {
+        "url": "/list",
+        "loginRole": "admin",
+        "views": {
+            "@main.hospital": {
+                "templateUrl": "views/hospital/labelManage/labelManage.html",
+                "controller": "labelManageController"
+            }
+        },
+        "name": "main.hospital.labelManage.list"
+    },
+    {
+        "url": "/dictManage",
+        "loginRole": "admin",
+        "templateUrl": "views/hospital/dictManage/dictManage.html",
+        "controller": "dictManageController",
+        "name": "main.hospital.dictManage"
+    },
+    {
+        "url": "/nurseManage",
+        "loginRole": "admin",
+        "templateUrl": "views/hospital/groupManage/nurseManage.html",
+        "controller": "nurseManageController",
+        "name": "main.hospital.nurseManage"
+    },
+    {
+        "url": "/addNurse",
+        "loginRole": "admin",
+        "templateUrl": "views/hospital/groupManage/addNurse.html",
+        "controller": "addNurseController",
+        "name": "main.hospital.addNurse"
+    },
+    {
+        "url": "/login/:isFeedback",
+        "templateUrl": "views/login/loginContent.html",
+        "controller": "loginController",
+        "loginRequired": false,
+        "name": "main.login"
+    },
+    {
+        "url": "/materials",
+        "loginRole": "admin",
+        "templateUrl": "views/materials/materials.html",
+        "controller": "materialsController",
+        "params": {
+            "nodeId": null
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.materials"
+    },
+    {
+        "url": "/notice",
+        "loginRole": "common",
+        "abstract": true,
+        "loginRequired": true,
+        "templateUrl": "views/notice/notice.html",
+        "controller": "noticeController",
+        "name": "main.notice"
+    },
+    {
+        "url": "/discussNotice",
+        "loginRole": "common",
+        "loginRequired": true,
+        "templateUrl": "views/notice/discussNotice.html",
+        "controller": "discussNoticeController",
+        "name": "main.notice.discussNotice"
+    },
+    {
+        "url": "/trainNotice",
+        "loginRole": "common",
+        "loginRequired": true,
+        "templateUrl": "views/notice/trainNotice.html",
+        "controller": "trainNoticeController",
+        "resolve": {
+            "loadTraining": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.notice.trainNotice"
+    },
+    {
+        "url": "/paper",
+        "loginRole": "admin",
+        "views": {
+            "": {
+                "templateUrl": "views/paper/paper.html",
+                "controller": "paperController"
+            },
+            "@main.paper": {
+                "templateUrl": "views/paper/navBar.html"
+            }
+        },
+        "resolve": {
+            "loadPaper": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.paper"
+    },
+    {
+        "url": "/list",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content@main.paper": {
+                "templateUrl": "views/paper/list/paperList.html",
+                "controller": "paperListController"
+            }
+        },
+        "name": "main.paper.list"
+    },
+    {
+        "url": "/edit/:paperId",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "@main.paper": {
+                "templateUrl": "views/paper/create/paperCreate.html",
+                "controller": "paperCreateController"
+            }
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadQuestion": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.paper.list.edit"
+    },
+    {
+        "url": "/create/:type",
+        "loginRole": "admin",
+        "params": {
+            "basicAndPartData": null,
+            "selfTestList": null
+        },
+        "views": {
+            "@main.paper": {
+                "templateUrl": "views/paper/create/paperCreate.html",
+                "controller": "paperCreateController"
+            }
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadQuestion": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.paper.create"
+    },
+    {
+        "url": "/random/:type",
+        "loginRole": "admin",
+        "params": {
+            "paperRule": null
+        },
+        "views": {
+            "@main.paper": {
+                "templateUrl": "views/paper/create/randomPaperCreate.html",
+                "controller": "randomCreateController"
+            }
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadQuestion": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.paper.random"
+    },
+    {
+        "url": "/preview/:paperId",
+        "loginRole": "admin",
+        "params": {
+            "type": null,
+            "backName": null,
+            "backState": null,
+            "data": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/paper/preview/paperPreview.html",
+                "controller": "paperPreviewController"
+            }
+        },
+        "resolve": {
+            "loadQuestion": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.paper.preview"
+    },
+    {
+        "url": "/previewRule/:paperRuleId",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/paper/preview/paperPreviewRule.html",
+                "controller": "paperPreviewRuleController"
+            }
+        },
+        "name": "main.paper.previewRule"
+    },
+    {
+        "url": "/tableLsit",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content@main.paper": {
+                "templateUrl": "views/paper/list/judgeTableList.html",
+                "controller": "tableListController"
+            }
+        },
+        "name": "main.paper.tableList"
+    },
+    {
+        "url": "/tableCreate",
+        "loginRole": "admin",
+        "params": {
+            "scoreSheetId": null,
+            "data": null
+        },
+        "views": {
+            "content@main.paper": {
+                "templateUrl": "views/paper/create/judgeTableCreate.html",
+                "controller": "tableCreateController"
+            }
+        },
+        "name": "main.paper.tableCreate"
+    },
+    {
+        "url": "/print",
+        "loginRole": "admin",
+        "views": {
+            "": {
+                "templateUrl": "views/print/print.html"
+            }
+        },
+        "resolve": {
+            "loadPrint": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.print"
+    },
+    {
+        "url": "/reportList/:examId",
+        "loginRole": "admin",
+        "params": {
+            "curSort": null,
+            "isSharedExam": null,
+            "data": null,
+            "examState": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/print/reporterPrint.html",
+                "controller": "reporterPrintController"
+            }
+        },
+        "name": "main.print.reporter"
+    },
+    {
+        "url": "/offLineReporter/:examId",
+        "loginRole": "admin",
+        "params": {
+            "data": null,
+            "isSharedExam": null,
+            "examState": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/print/offLinePrint.html",
+                "controller": "offLinePrintController"
+            }
+        },
+        "name": "main.print.offLineReporter"
+    },
+    {
+        "url": "/judge/print/:recId",
+        "loginRole": "admin",
+        "params": {
+            "recId": null,
+            "examId": null,
+            "paperData": null,
+            "userInfo": null,
+            "userScore": null,
+            "examImages": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/print/paperUser.html",
+                "controller": "paperUserController"
+            }
+        },
+        "name": "main.print.paperUser"
+    },
+    {
+        "url": "/questions",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/question.html",
+        "controller": "questionController",
+        "params": {
+            "folderId": null
+        },
+        "resolve": {
+            "loadQuestion": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.questions"
+    },
+    {
+        "url": "/examination/:folderId",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/newQuestion.html",
+        "controller": "questionAddController",
+        "params": {
+            "folderPath": null
+        },
+        "resolve": {
+            "loadQuestion": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.createQuestion"
+    },
+    {
+        "url": "/selectQuestionType",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/selectQuestionType.html",
+        "name": "main.createQuestion.selectQuestionType"
+    },
+    {
+        "url": "^/radioQuestion/:folderId?&questionId&id",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/radioQuestion.html",
+        "controller": "radioQuestionController",
+        "params": {
+            "requireData": null
+        },
+        "name": "main.createQuestion.radioQuestion"
+    },
+    {
+        "url": "^/fillBlankQuestion/:folderId?&questionId&id",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/fillBlankQuestion.html",
+        "controller": "fillBlankQuestionController",
+        "params": {
+            "requireData": null
+        },
+        "name": "main.createQuestion.fillBlankQuestion"
+    },
+    {
+        "url": "^/indefiniteQuestion/:folderId?&questionId&id",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/indefiniteQuestion.html",
+        "controller": "indefiniteQuestionController",
+        "params": {
+            "requireData": null
+        },
+        "name": "main.createQuestion.indefiniteQuestion"
+    },
+    {
+        "url": "^/multiQuestion/:folderId?&questionId&id",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/multiQuestion.html",
+        "controller": "multiQuestionController",
+        "params": {
+            "requireData": null
+        },
+        "name": "main.createQuestion.multiQuestion"
+    },
+    {
+        "url": "^/yesNoQuestion/:folderId?&questionId&id",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/yesNoQuestion.html",
+        "controller": "yesNoQuestionController",
+        "params": {
+            "requireData": null
+        },
+        "name": "main.createQuestion.yesNoQuestion"
+    },
+    {
+        "url": "^/askQuestion/:folderId?&questionId&id",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/askQuestion.html",
+        "controller": "askQuestionController",
+        "params": {
+            "requireData": null
+        },
+        "name": "main.createQuestion.askQuestion"
+    },
+    {
+        "url": "^/caseQuestion/:folderId?&questionId&id",
+        "loginRole": "admin",
+        "templateUrl": "views/questions/caseQuestion.html",
+        "controller": "caseQuestionController",
+        "params": {
+            "requireData": null
+        },
+        "name": "main.createQuestion.caseQuestion"
+    },
+    {
+        "url": "/questionnaire",
+        "loginRole": "admin",
+        "templateUrl": "views/questionnaire/questionnaire.html",
+        "resolve": {
+            "loadQues": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.questionnaire"
+    },
+    {
+        "url": "/questionnaireList",
+        "loginRole": "admin",
+        "templateUrl": "views/questionnaire/questionnaireSurvey/questionnaireList.html",
+        "controller": "questionnaireListController",
+        "name": "main.questionnaire.questionnaireList"
+    },
+    {
+        "url": "/questionnairePublish/?:questionnaireId&:questionnaireName",
+        "loginRole": "admin",
+        "params": {
+            "questionnaireName": null
+        },
+        "templateUrl": "views/questionnaire/questionnaireSurvey/questionnairePublish.html",
+        "controller": "questionnairePublishController",
+        "name": "main.questionnaire.questionnairePublish"
+    },
+    {
+        "url": "/survey?:curPage&:tabFlag",
+        "loginRole": "examinee",
+        "templateUrl": "views/questionnaire/survey/list.html",
+        "controller": "quesListController",
+        "name": "main.questionnaire.survey"
+    },
+    {
+        "url": "/questionnaireAnswer?:questionnaireId&:qusRecId&:showName&:stateName&{stateParams:json}",
+        "loginRole": "examinee",
+        "params": {
+            "questionnaireId": null,
+            "qusRecId": null,
+            "showName": null,
+            "stateName": null,
+            "stateParams": null
+        },
+        "views": {
+            "@main": {
+                "templateUrl": "views/questionnaire/survey/surveyQuestionnaire.html",
+                "controller": "questionnaireAnswerController"
+            }
+        },
+        "name": "main.questionnaire.answer"
+    },
+    {
+        "url": "^/questionnaireSurvey/:questionnaireId",
+        "loginRole": "admin",
+        "params": {
+            "activityId": null,
+            "courseName": null,
+            "activity": null
+        },
+        "templateUrl": "views/questionnaire/questionnaireSurvey/questionnaireSurvey.html",
+        "controller": "questionnaireSurveyController",
+        "resolve": {
+            "loadQuestionnaire": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.questionnaireSurvey"
+    },
+    {
+        "url": "/questionnairePreview/:questionnaireId",
+        "loginRole": "admin",
+        "params": {
+            "activityId": null,
+            "activity": null
+        },
+        "templateUrl": "views/questionnaire/questionnaireSurvey/questionnairePreview.html",
+        "controller": "questionnairePreviewController",
+        "resolve": {
+            "loadQuestionnaire": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.questionnairePreview"
+    },
+    {
+        "url": "/questionnaireDetail/:questionnaireId",
+        "loginRole": "admin",
+        "params": {
+            "activity": null
+        },
+        "templateUrl": "views/questionnaire/questionnaireSurvey/questionnaireDetail.html",
+        "controller": "questionnaireDetailController",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadQuestionnaire": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.questionnaireDetail"
+    },
+    {
+        "url": "/reportAnalysis",
+        "loginRole": "admin",
+        "templateUrl": "views/reportAnalysis/reportAnalysis.html",
+        "resolve": {
+            "loadReportAnalysis": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.reportAnalysis"
+    },
+    {
+        "url": "/trainInfo",
+        "loginRole": "admin",
+        "templateUrl": "views/reportAnalysis/trainInfo/trainInfo.html",
+        "controller": "trainInfoController",
+        "name": "main.reportAnalysis.trainInfo"
+    },
+    {
+        "url": "/studyRecord/:userId",
+        "loginRole": "admin",
+        "templateUrl": "views/reportAnalysis/trainInfo/studyRecord.html",
+        "controller": "studyRecordController",
+        "name": "main.reportAnalysis.studyRecord"
+    },
+    {
+        "url": "/trainings",
+        "loginRole": "examinee",
+        "templateUrl": "views/trainings/training.html",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadTraining": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.training"
+    },
+    {
+        "url": "/trainingMaterials",
+        "loginRole": "examinee",
+        "templateUrl": "views/trainings/trainingMaterials/nurseTraining.html",
+        "controller": "nurseTrainingController",
+        "name": "main.training.trainingMaterials"
+    },
+    {
+        "url": "/trainingReporter",
+        "loginRole": "examinee",
+        "templateUrl": "views/trainings/trainingReporter/trainingReporter.html",
+        "controller": "trainingReporterController",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.training.trainingReporter"
+    },
+    {
+        "url": "/myCourse?:curPage&:studyState&:compulsoryFlag",
+        "loginRole": "examinee",
+        "params": {
+            "curPage": null,
+            "studyState": null,
+            "compulsoryFlag": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/trainings/myCourse/myCourse.html",
+                "controller": "myCourseController"
+            }
+        },
+        "name": "main.training.myCourse"
+    },
+    {
+        "url": "/course/:courseId/:msgId",
+        "loginRole": "common",
+        "params": {
+            "previous": null,
+            "curPage": null,
+            "courseId": null,
+            "classId": null,
+            "state": null,
+            "studyState": null,
+            "compulsoryFlag": null,
+            "requireData": null
+        },
+        "views": {
+            "@main": {
+                "templateUrl": "views/trainings/myCourse/courseClass.html",
+                "controller": "courseClassController"
+            }
+        },
+        "name": "main.training.courseClass"
+    },
+    {
+        "url": "/course/:courseId",
+        "loginRole": "common",
+        "params": {
+            "studyState": null,
+            "compulsoryFlag": null,
+            "previous": null,
+            "curPage": null,
+            "showTab": null
+        },
+        "views": {
+            "@main": {
+                "templateUrl": "views/trainings/myCourse/classStudy.html",
+                "controller": "classStudyController"
+            }
+        },
+        "name": "main.training.classStudy"
+    },
+    {
+        "url": "/class/:classId/study/:nodeId",
+        "loginRole": "common",
+        "params": {
+            "courseData": null
+        },
+        "templateUrl": "views/trainings/myCourse/studyContent.html",
+        "name": "main.training.classStudy.studyContent"
+    },
+    {
+        "url": "/class/:classId/test",
+        "loginRole": "common",
+        "params": {
+            "courseData": null
+        },
+        "templateUrl": "views/trainings/myCourse/classTest.html",
+        "controller": "classTestController",
+        "name": "main.training.classStudy.classTest"
+    },
+    {
+        "url": "/class/:classId/testEnd",
+        "loginRole": "common",
+        "params": {
+            "courseData": null
+        },
+        "templateUrl": "views/trainings/myCourse/testEnd.html",
+        "controller": "testEndController",
+        "name": "main.training.classStudy.testEnd"
+    },
+    {
+        "url": "^/courseBasicInfo/:courseId",
+        "loginRole": "examinee",
+        "templateUrl": "views/trainings/collegeCourses/courseBasicInfo.html",
+        "controller": "courseBasicInfoController",
+        "name": "main.training.courseBasicInfo"
+    },
+    {
+        "url": "/collegeCourses",
+        "loginRole": "examinee",
+        "templateUrl": "views/trainings/collegeCourses/courseLists.html",
+        "controller": "collegeCourseController",
+        "name": "main.training.collegeCourses"
+    },
+    {
+        "url": "/offLineTraining",
+        "params": {
+            "pageNo": null
+        },
+        "loginRole": "examinee",
+        "templateUrl": "views/trainings/offLineTraining/offLineTraining.html",
+        "controller": "offLineTrainingController",
+        "name": "main.training.offLineTraining"
+    },
+    {
+        "url": "/offLineBasicInfo/:trainId&:pageNo",
+        "params": {
+            "previous": null,
+            "requireData": null
+        },
+        "loginRole": "common",
+        "templateUrl": "views/trainings/offLineTraining/offLineBasicInfo.html",
+        "controller": "trainBasicController",
+        "name": "main.training.offLineBasicInfo"
+    },
+    {
+        "url": "/test",
+        "loginRole": "admin",
+        "views": {
+            "": {
+                "templateUrl": "views/test/test.html",
+                "controller": "testController"
+            }
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadTest": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.test"
+    },
+    {
+        "url": "/create",
+        "loginRole": "admin",
+        "abstract": true,
+        "name": "main.test.create"
+    },
+    {
+        "url": "/chooseType",
+        "loginRole": "admin",
+        "params": {
+            "type": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/create/chooseType.html",
+                "controller": "chooseTypeController"
+            }
+        },
+        "name": "main.test.create.chooseType"
+    },
+    {
+        "url": "/firstStep/:type",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/create/firstStep.html",
+                "controller": "firstStepController"
+            }
+        },
+        "name": "main.test.create.firstStep"
+    },
+    {
+        "url": "/secondStep",
+        "loginRole": "admin",
+        "params": {
+            "paper": null,
+            "data": null,
+            "paperRule": null,
+            "type": null,
+            "paperData": null,
+            "basicAndPartData": null,
+            "selfTestList": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/create/secondStep.html",
+                "controller": "secondStepController"
+            }
+        },
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ],
+            "loadCreatePaper": [
+                "$ocLazyLoad",
+                "loadLib",
+                null
+            ]
+        },
+        "name": "main.test.create.secondStep"
+    },
+    {
+        "url": "/thirdStep",
+        "loginRole": "admin",
+        "params": {
+            "requireData": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/create/thirdStep.html",
+                "controller": "thirdStepController"
+            }
+        },
+        "name": "main.test.create.thirdStep"
+    },
+    {
+        "url": "/list",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content": {
+                "templateUrl": "views/test/list/list.html",
+                "controller": "testListController"
+            }
+        },
+        "name": "main.test.list"
+    },
+    {
+        "url": "/update/:examId",
+        "loginRole": "admin",
+        "params": {
+            "exam": null,
+            "data": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/update/update.html",
+                "controller": "updateController"
+            }
+        },
+        "name": "main.test.list.update"
+    },
+    {
+        "url": "/report/:examId",
+        "loginRole": "admin",
+        "params": {
+            "curPage": null,
+            "sortStatus": null,
+            "examState": null,
+            "isSharedExam": null,
+            "data": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/report/report.html",
+                "controller": "reportController"
+            }
+        },
+        "name": "main.test.list.report"
+    },
+    {
+        "url": "/checkExamUser/:examId/:type",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/list/checkExamUser.html",
+                "controller": "checkExamUserController"
+            }
+        },
+        "name": "main.test.list.checkExamUser"
+    },
+    {
+        "url": "/reporting/:examId",
+        "loginRole": "admin",
+        "params": {
+            "curPage": null,
+            "data": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/reporting/reporting.html",
+                "controller": "reportingController"
+            }
+        },
+        "name": "main.test.list.reporting"
+    },
+    {
+        "url": "/analysis/:examId/:isOffline",
+        "loginRole": "admin",
+        "params": {
+            "isSharedExam": null,
+            "examState": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/analysis/analysis.html",
+                "controller": "analysisController"
+            }
+        },
+        "resolve": {
+            "loadQuestion": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.test.list.analysis"
+    },
+    {
+        "url": "/compare/:examId/:isOffline",
+        "loginRole": "admin",
+        "params": {
+            "isSharedExam": null,
+            "examState": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/analysis/compare.html",
+                "controller": "compareController"
+            }
+        },
+        "resolve": {
+            "loadQuestion": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.test.list.compare"
+    },
+    {
+        "url": "/offLineList",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content": {
+                "templateUrl": "views/test/list/offLineList.html",
+                "controller": "offLineListController"
+            }
+        },
+        "name": "main.test.offLineList"
+    },
+    {
+        "url": "/offLineCreate",
+        "loginRole": "admin",
+        "params": {
+            "examId": null
+        },
+        "views": {
+            "content": {
+                "templateUrl": "views/test/create/offLine.html",
+                "controller": "offLineCreateController"
+            }
+        },
+        "name": "main.test.offLineCreate"
+    },
+    {
+        "url": "/registerScore/:examId",
+        "loginRole": "admin",
+        "params": {
+            "examState": null,
+            "isSharedExam": null,
+            "data": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/offline/registerScore.html",
+                "controller": "offlineRegisterScoreController"
+            }
+        },
+        "resolve": {
+            "loadPapa": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.test.offlineRegisterScore"
+    },
+    {
+        "url": "/selfTestList",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content": {
+                "templateUrl": "views/test/list/selfTestList.html",
+                "controller": "selfTestListController"
+            }
+        },
+        "name": "main.test.selfTestList"
+    },
+    {
+        "url": "/selfTestCreate",
+        "loginRole": "admin",
+        "params": {
+            "practiceId": null,
+            "paperId": null
+        },
+        "views": {
+            "content": {
+                "templateUrl": "views/test/create/selfTestCreate.html",
+                "controller": "selfTestCreateController"
+            }
+        },
+        "resolve": {
+            "loadSelfTest": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.test.selfTestCreate"
+    },
+    {
+        "url": "/sharedExamList",
+        "loginRole": "admin",
+        "params": {
+            "data": null
+        },
+        "views": {
+            "content": {
+                "templateUrl": "views/test/list/sharedExamList.html",
+                "controller": "sharedExamListController"
+            }
+        },
+        "name": "main.test.sharedExamList"
+    },
+    {
+        "url": "/report/:examId",
+        "loginRole": "admin",
+        "params": {
+            "examId": null,
+            "isSharedExam": null,
+            "data": null
+        },
+        "views": {
+            "content@main.test": {
+                "templateUrl": "views/test/report/report.html",
+                "controller": "reportController"
+            }
+        },
+        "name": "main.test.sharedExamReport"
+    },
+    {
+        "url": "/examPublish/:examId",
+        "loginRole": "admin",
+        "params": {
+            "examId": null,
+            "exam": null,
+            "examType": null,
+            "curPage": null
+        },
+        "views": {
+            "content": {
+                "templateUrl": "views/test/publish/examPublish.html",
+                "controller": "examPublishController"
+            }
+        },
+        "name": "main.test.examPublish"
+    },
+    {
+        "url": "/judge/:recId",
+        "loginRole": "admin",
+        "params": {
+            "examId": null,
+            "curPage": null,
+            "thirdTitle": null,
+            "data": null,
+            "disableJudge": false,
+            "examState": null
+        },
+        "views": {
+            "": {
+                "templateUrl": "views/test/judge/paperJudge.html",
+                "controller": "paperJudgeController"
+            }
+        },
+        "resolve": {
+            "loadQuestion": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.judge"
+    },
+    {
+        "url": "/user",
+        "loginRole": "common",
+        "templateUrl": "views/user/user.html",
+        "controller": "userController",
+        "name": "main.user"
+    },
+    {
+        "url": "/basicInfo",
+        "loginRole": "common",
+        "templateUrl": "views/user/basicInfo.html",
+        "controller": "basicInfoController",
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.user.basicInfo"
+    },
+    {
+        "url": "/jobInfo",
+        "loginRole": "common",
+        "templateUrl": "views/user/jobInfo.html",
+        "controller": "jobInfoController",
+        "name": "main.user.jobInfo"
+    },
+    {
+        "url": "/learningRecord",
+        "params": {
+            "requireData": null
+        },
+        "loginRole": "common",
+        "templateUrl": "views/user/learningRecord.html",
+        "controller": "learningRecordController",
+        "name": "main.user.learningRecord"
+    },
+    {
+        "url": "/updatePhone/:isModify",
+        "params": {
+            "userId": null,
+            "isModify": null
+        },
+        "loginRole": "common",
+        "templateUrl": "views/user/updatePhone.html",
+        "controller": "updatePhoneController",
+        "name": "main.user.updatePhone"
+    },
+    {
+        "url": "/updatePassword",
+        "loginRole": "common",
+        "templateUrl": "views/user/updatePassword.html",
+        "controller": "userPasswordController",
+        "name": "main.user.updatePassword"
+    },
+    {
+        "url": "/userVerify",
+        "loginRole": "common",
+        "templateUrl": "views/user/userVerify.html",
+        "controller": "userVerifyController",
+        "name": "main.userVerify"
+    },
+    {
+        "url": "/userFeedback/:id",
+        "loginRole": "common",
+        "loginRequired": false,
+        "templateUrl": "views/user/feedback.html",
+        "controller": "userFeedbackController",
+        "name": "main.userFeedback"
+    },
+    {
+        "url": "/register",
+        "templateUrl": "views/register/registerHeader.html",
+        "controller": "registerController",
+        "name": "main.register"
+    },
+    {
+        "url": "/registerBaseInfo",
+        "templateUrl": "views/register/registerFirstStep.html",
+        "controller": "registerMobileController",
+        "loginRequired": false,
+        "name": "main.register.registerBaseInfo"
+    },
+    {
+        "url": "/registerUserInfo",
+        "templateUrl": "views/register/registerUserInfo.html",
+        "controller": "registerUserInfoController",
+        "loginRequired": false,
+        "resolve": {
+            "loadLib": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.register.registerUserInfo"
+    },
+    {
+        "url": "/registerFinish",
+        "templateUrl": "views/register/registerFinish.html",
+        "controller": "registerFinishController",
+        "loginRequired": false,
+        "name": "main.register.registerFinish"
+    },
+    {
+        "url": "/forgetPassword",
+        "templateUrl": "views/forgetPassword/forgetPasswordHeader.html",
+        "controller": "forgetPasswordController",
+        "name": "main.forgetPassword"
+    },
+    {
+        "url": "/resetPassword",
+        "templateUrl": "views/forgetPassword/resetPassword.html",
+        "loginRequired": false,
+        "name": "main.forgetPassword.resetPassword"
+    },
+    {
+        "url": "/home",
+        "loginRequired": false,
+        "loginRole": "common",
+        "views": {
+            "": {
+                "templateUrl": "views/home/home.html",
+                "controller": "homeController"
+            }
+        },
+        "params": {
+            "status": -1,
+            "showPassPrompt": null
+        },
+        "resolve": {
+            "loadHome": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.home"
+    },
+    {
+        "url": "/moreInfoPage",
+        "loginRole": "common",
+        "loginRequired": false,
+        "templateUrl": "views/home/moreInfoPage.html",
+        "controller": "homeController",
+        "resolve": {
+            "loadHome": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.moreInfoPage"
+    },
+    {
+        "url": "/copyright",
+        "loginRole": "common",
+        "loginRequired": false,
+        "templateUrl": "views/main/copyright.html",
+        "controller": "homeController",
+        "resolve": {
+            "loadHome": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.copyRight"
+    },
+    {
+        "url": "/privacy",
+        "loginRole": "common",
+        "loginRequired": false,
+        "templateUrl": "views/main/privacy.html",
+        "controller": "homeController",
+        "resolve": {
+            "loadHome": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.privacy"
+    },
+    {
+        "url": "/disclaimer",
+        "loginRole": "common",
+        "loginRequired": false,
+        "templateUrl": "views/main/disclaimer.html",
+        "controller": "homeController",
+        "resolve": {
+            "loadHome": [
+                "$ocLazyLoad",
+                null
+            ]
+        },
+        "name": "main.disclaimer"
+    }
+]
