@@ -9,7 +9,17 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="examCode" elementType="Argument">
             <stringProp name="Argument.name">examCode</stringProp>
-            <stringProp name="Argument.value">691966</stringProp>
+            <stringProp name="Argument.value">301159</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="username" elementType="Argument">
+            <stringProp name="Argument.name">username</stringProp>
+            <stringProp name="Argument.value">sshh123</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="password" elementType="Argument">
+            <stringProp name="Argument.name">password</stringProp>
+            <stringProp name="Argument.value">sshh123</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -17,7 +27,7 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding">gb2312</stringProp>
         <stringProp name="filename">1000p_user.csv</stringProp>
@@ -31,7 +41,7 @@
       <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
         <collectionProp name="AuthManager.auth_list">
           <elementProp name="" elementType="Authorization">
-            <stringProp name="Authorization.url">https://apirls.512ks.cn/</stringProp>
+            <stringProp name="Authorization.url">https://api.512ks.cn/</stringProp>
             <stringProp name="Authorization.username">${username}</stringProp>
             <stringProp name="Authorization.password">${password}</stringProp>
             <stringProp name="Authorization.domain"></stringProp>
@@ -56,6 +66,7 @@
         <boolProp name="resetInterpreter">false</boolProp>
         <stringProp name="script">import org.apache.commons.codec.binary.Base64;
 import org.json.*;
+import java.util.UUID;
 
 String basic = &quot;Basic &quot;;
 String username=vars.get(&quot;username&quot;);
@@ -63,7 +74,11 @@ String password=vars.get(&quot;password&quot;);
 String str = username + &quot;:&quot; + password;
 
 byte[] encryptedUid = Base64.encodeBase64(str.getBytes());
-vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
+vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));
+
+String str = UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;);
+String s = str.substring(str.length()-20);
+props.put(&quot;kyeeNecCode&quot;,s);</stringProp>
       </BeanShellPreProcessor>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
@@ -72,20 +87,20 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">8</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">40</stringProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">300</stringProp>
         <longProp name="ThreadGroup.start_time">1473151080000</longProp>
         <longProp name="ThreadGroup.end_time">1473152280000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">300</stringProp>
+        <stringProp name="ThreadGroup.duration">600</stringProp>
         <stringProp name="ThreadGroup.delay">10</stringProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examInfo?entryCode-options" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examInfo?entryCode-options" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -112,7 +127,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -128,7 +143,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/waitingExam</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/waitingExam</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -147,11 +162,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examInfo?entryCode-get" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examInfo?entryCode-get" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -178,7 +193,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -186,7 +201,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/waitingExam</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/waitingExam</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -223,11 +238,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/user" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/user" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -254,7 +269,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -262,7 +277,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/previousExam/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/previousExam/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -294,11 +309,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examInfo?examId=options" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examInfo?examId=options" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -325,7 +340,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -341,7 +356,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -360,11 +375,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examInfo?examId=get" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examInfo?examId=get" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -391,7 +406,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -399,7 +414,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -418,11 +433,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examRec-options" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examRec-options" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -449,7 +464,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -465,7 +480,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -484,18 +499,18 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examRec-post" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examRec-post" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;examinee&quot;:&quot;${userId}&quot;,&quot;groupName&quot;:&quot;压力测试&quot;,&quot;groupId&quot;:122,&quot;jobCode&quot;:&quot;${userInfo_g3}&quot;,&quot;nurseLevelId&quot;:${userInfo_g4},&quot;jobTitleId&quot;:${userInfo_g2},&quot;headNurse&quot;:false,&quot;userId&quot;:${userId},&quot;examId&quot;:&quot;${examId}&quot;}</stringProp>
+                <stringProp name="Argument.value">{&quot;examinee&quot;:&quot;${userId}&quot;,&quot;groupName&quot;:&quot;护理教育事业部（所属）&quot;,&quot;groupId&quot;:14,&quot;jobCode&quot;:&quot;${userInfo_g3}&quot;,&quot;nurseLevelId&quot;:${userInfo_g4},&quot;jobTitleId&quot;:${userInfo_g2},&quot;headNurse&quot;:false,&quot;userId&quot;:${userId},&quot;examId&quot;:&quot;${examId}&quot;}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -522,7 +537,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -534,7 +549,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -546,7 +561,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">KyeeNecCode</stringProp>
-                <stringProp name="Header.value">jydit0q6gwoy7d4jv8qa</stringProp>
+                <stringProp name="Header.value">${__P(kyeeNecCode,1)}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -566,11 +581,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examination?examId=options" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examination?examId=options" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -597,7 +612,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -613,7 +628,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -632,11 +647,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examination?examId=get" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examination?examId=get" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -663,7 +678,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -671,7 +686,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -690,11 +705,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examInfo?examId=get" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examInfo?examId=get" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -721,7 +736,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -729,7 +744,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -748,11 +763,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/endTime?examId=options" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/endTime?examId=options" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -779,7 +794,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -795,7 +810,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -814,11 +829,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/quitRecord?examRecId=options" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/quitRecord?examRecId=options" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -845,7 +860,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -861,7 +876,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examInfo/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examInfo/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -880,11 +895,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/endTime?examId=get" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/endTime?examId=get" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -911,7 +926,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -919,7 +934,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -938,11 +953,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/quitRecord?examRecId=get" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/quitRecord?examRecId=get" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -969,7 +984,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -977,7 +992,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -996,11 +1011,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/paperInfo?examId=options" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/paperInfo?examId=options" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1027,7 +1042,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1043,7 +1058,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1062,11 +1077,11 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/paperInfo?examId=get" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/paperInfo?examId=get" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1093,7 +1108,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1101,7 +1116,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1179,11 +1194,11 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/answerRecord-options" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/answerRecord-options" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1210,7 +1225,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1226,7 +1241,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1245,7 +1260,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/answerRecord-put" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/answerRecord-put" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -1256,7 +1271,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1283,7 +1298,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1295,7 +1310,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1307,7 +1322,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">KyeeNecCode</stringProp>
-                <stringProp name="Header.value">jydit0q6gwoy7d4jv8qa</stringProp>
+                <stringProp name="Header.value">${__P(kyeeNecCode,1)}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1323,11 +1338,11 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           </SyncTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examGrade?examId=options" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examGrade?examId=options" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1354,7 +1369,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1370,7 +1385,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/${examId}&amp;${examRecId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1389,11 +1404,11 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/examGrade?examId=get" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/examGrade?examId=get" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1420,7 +1435,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1428,7 +1443,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/examFinish/${examId}</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/examFinish/${examId}</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1452,7 +1467,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           </SyncTimer>
           <hashTree/>
         </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="false">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -1528,7 +1543,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           <boolProp name="exclude_checkbox_state">false</boolProp>
         </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="聚合报告" enabled="false">
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="聚合报告" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -1559,7 +1574,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               <idleTime>true</idleTime>
             </value>
           </objProp>
-          <stringProp name="filename">/Users/huis/TestSpace/interface-perform-test/jmx/test23.jtl</stringProp>
+          <stringProp name="filename">/Users/huis/TestSpace/interface-perform-test/jmx/test1.jtl</stringProp>
         </ResultCollector>
         <hashTree/>
         <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ThreadsStateOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Active Threads Over Time" enabled="false">
@@ -1707,7 +1722,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -1722,11 +1737,11 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
         <stringProp name="ThreadGroup.delay">10</stringProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/practiceInfo?practiceId=241-options" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/practiceInfo?practiceId=241-options" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1750,7 +1765,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1766,7 +1781,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exam/exercise</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exam/exercise</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1785,11 +1800,11 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://apirls.512ks.cn/practiceInfo?practiceId=241-get" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://api.512ks.cn/practiceInfo?practiceId=241-get" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">apirls.512ks.cn</stringProp>
+          <stringProp name="HTTPSampler.domain">api.512ks.cn</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -1817,7 +1832,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Origin" elementType="Header">
                 <stringProp name="Header.name">Origin</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
@@ -1825,7 +1840,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://rls.512ks.cn/exerciseStart</stringProp>
+                <stringProp name="Header.value">https://www.512ks.cn/exerciseStart</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
