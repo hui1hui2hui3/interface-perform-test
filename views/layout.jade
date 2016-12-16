@@ -3,9 +3,12 @@ html
     head
         title= title
         link(rel='stylesheet', href='/javascripts/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/javascripts/bootstrap-select-1.12.1/dist/css/bootstrap-select.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         script(src='/javascripts/jquery/dist/jquery.min.js')
         script(src='/javascripts/bootstrap/dist/js/bootstrap.min.js')
+        script(src='/javascripts/bootstrap-select-1.12.1/dist/js/bootstrap-select.min.js')
+        script(src='/javascripts/bootstrap-select-1.12.1/dist/js/i18n/defaults-zh_cn.min.js')
     body.container
         header
             nav.navbar.navbar-default
@@ -25,6 +28,9 @@ html
                         ul.nav.navbar-nav
                             li
                                 a(href="/curltest") Curl Test Speed
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/backend_depend") Backend Dependencies
                         ul.nav.navbar-nav
                             li
                                 a(target="_blank",href="https://sense.blazemeter.com/gui/") BlazeMeter Sense

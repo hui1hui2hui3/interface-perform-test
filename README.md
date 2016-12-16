@@ -7,6 +7,7 @@
 
 # 使用指南
 ## 1. RUN
+`npm install` 安装依赖库
 `npm start`运行，
 
 ## 2. 访问

@@ -8,6 +8,7 @@ var jmxReader = require('../components/jmxReader');
 var storageCreater = require('../components/diskStorageCreater');
 var urlJsonParser = require('../components/urlJsonParser');
 var runCurl = require('../components/runCurl');
+var xmlParser = require('../components/xmlParser');
 
 var uploadJmx = storageCreater("./jmx", "jmxFile");
 var uploadJmxJson = storageCreater("./json", "jmxFile");
@@ -81,7 +82,7 @@ router.get('/urllists', function(req, res, next) {
 router.get('/curltest', function(req, res, next) {
     var testurl = req.query.url;
     if (testurl) {
-        runCurl(testurl).then(function(data){
+        runCurl(testurl).then(function(data) {
             var results = data.split(':');
             res.render('curltest', {
                 title: "Curl Test Page",
@@ -90,8 +91,8 @@ router.get('/curltest', function(req, res, next) {
                 uploadUrl: "curl",
                 uploadTitle: "curl(暂时不可用)"
             });
-        },function(error){
-            res.end('error:'+error);
+        }, function(error) {
+            res.end('error:' + error);
         })
     } else {
         res.render('curltest', {
@@ -102,6 +103,24 @@ router.get('/curltest', function(req, res, next) {
             uploadTitle: "curl(暂时不可用)"
         });
     }
+});
+
+router.get('/backend_depend', function(req, res, next) {
+    var queryFile = req.query.searchFile;
+
+    xmlParser().then(function(data) {
+        xmlParser.smartParser(data);
+        var dependResults = queryFile ? dependResults = xmlParser.searchFile(queryFile) : "";
+        res.render('backend_depend', {
+            title: "Backend Dependencies",
+            dataResult: data,
+            searchResult: JSON.stringify(dependResults),
+            uploadUrl: "url",
+            uploadTitle: "url(暂时不可用)"
+        });
+    }, function(error) {
+        res.end('error:' + error);
+    })
 });
 
 //---------ajax api--------

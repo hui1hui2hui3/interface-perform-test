@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    form(id="searchDependency",action="/backend_depend",method="get")
+        label(for="searchFile") 输入要查询的文件名：
+        select.selectpicker(id="searchFile",name="searchFile",data-live-search="true")
+            each value,key in dataResult
+                option(value="#{key}",data-tokens="#{key}") #{key}
+        button.btn.btn-primary.btn-sm(type="submit") 搜索
+        
+    div.well
+        h3 #{searchResult}
