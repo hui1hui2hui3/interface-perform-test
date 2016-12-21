@@ -9,28 +9,28 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="examCode" elementType="Argument">
             <stringProp name="Argument.name">examCode</stringProp>
-            <stringProp name="Argument.value">475427</stringProp>
+            <stringProp name="Argument.value">007234</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="site" elementType="Argument">
             <stringProp name="Argument.name">site</stringProp>
-            <stringProp name="Argument.value">apirls.512ks.cn</stringProp>
+            <stringProp name="Argument.value">apidev.512ks.cn</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="originSite" elementType="Argument">
             <stringProp name="Argument.name">originSite</stringProp>
-            <stringProp name="Argument.value">https://rls.512ks.cn</stringProp>
+            <stringProp name="Argument.value">https://dev.512ks.cn</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+      <stringProp name="TestPlan.user_define_classpath">/Users/huis/TestSpace/interface-perform-test/lib/json-20160810.jar</stringProp>
     </TestPlan>
     <hashTree>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Person Account" enabled="true">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding">gb2312</stringProp>
-        <stringProp name="filename">1000p_user.csv</stringProp>
+        <stringProp name="filename">register_err.csv</stringProp>
         <boolProp name="quotedData">false</boolProp>
         <boolProp name="recycle">true</boolProp>
         <stringProp name="shareMode">shareMode.all</stringProp>
@@ -297,7 +297,7 @@ vars.put(&quot;token&quot;,token_type + &quot; &quot; +access_token);</stringPro
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">userInfo</stringProp>
-            <stringProp name="RegexExtractor.regex">&quot;userId&quot;:(\d*).*?&quot;jobTitleId&quot;:(\d*).*?&quot;jobCode&quot;:&quot;(\d*)&quot;.*?&quot;nurseLevelId&quot;:(\d*)</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;userId&quot;:(\d*).*?&quot;jobTitleId&quot;:(\d*).*?&quot;jobCode&quot;:&quot;(.*?)&quot;.*?&quot;nurseLevelId&quot;:(\d*)</stringProp>
             <stringProp name="RegexExtractor.template">$1$$2$$3$$4$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -369,6 +369,24 @@ vars.put(&quot;token&quot;,token_type + &quot; &quot; +access_token);</stringPro
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">userId</stringProp>
             <stringProp name="RegexExtractor.regex">&quot;userId&quot;:(\d*)</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">user_group</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;groupId&quot;:(\d*),&quot;groupName&quot;:&quot;(.*?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$$2$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="正则表达式提取器" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">realname</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;realName&quot;:&quot;(.*?)&quot;</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -447,7 +465,7 @@ vars.put(&quot;token&quot;,token_type + &quot; &quot; +access_token);</stringPro
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;examinee&quot;:&quot;${userId}&quot;,&quot;groupName&quot;:&quot;压力测试&quot;,&quot;groupId&quot;:122,&quot;jobCode&quot;:&quot;${userInfo_g3}&quot;,&quot;nurseLevelId&quot;:${userInfo_g4},&quot;jobTitleId&quot;:${userInfo_g2},&quot;headNurse&quot;:false,&quot;userId&quot;:${userId},&quot;examId&quot;:&quot;${examId}&quot;}</stringProp>
+                <stringProp name="Argument.value">{&quot;examinee&quot;:&quot;${realname}&quot;,&quot;groupName&quot;:&quot;${user_group_g2}&quot;,&quot;groupId&quot;:${user_group_g1},&quot;jobCode&quot;:&quot;${userInfo_g3}&quot;,&quot;nurseLevelId&quot;:${userInfo_g4},&quot;jobTitleId&quot;:${userInfo_g2},&quot;headNurse&quot;:false,&quot;userId&quot;:${userId},&quot;examId&quot;:&quot;${examId}&quot;}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -862,7 +880,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
           </SyncTimer>
           <hashTree/>
         </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="true">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="false">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
