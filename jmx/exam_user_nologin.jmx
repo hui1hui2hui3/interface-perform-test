@@ -9,7 +9,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="examCode" elementType="Argument">
             <stringProp name="Argument.name">examCode</stringProp>
-            <stringProp name="Argument.value">378486</stringProp>
+            <stringProp name="Argument.value">182637</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="site" elementType="Argument">
@@ -30,7 +30,7 @@
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Person Token" enabled="true">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding">gb2312</stringProp>
-        <stringProp name="filename">1000p_user_token.csv</stringProp>
+        <stringProp name="filename">data/1000p_user_rls_token.csv</stringProp>
         <boolProp name="quotedData">false</boolProp>
         <boolProp name="recycle">true</boolProp>
         <stringProp name="shareMode">shareMode.all</stringProp>
@@ -662,7 +662,7 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
           <stringProp name="HTTPSampler.path">examRec</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -690,10 +690,6 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
                 <stringProp name="Header.name">User-Agent</stringProp>
                 <stringProp name="Header.value">Mozilla/5.0(Macintosh;IntelMacOSX10_11_2)AppleWebKit/537.36(KHTML,likeGecko)Chrome/51.0.2704.106Safari/537.36</stringProp>
               </elementProp>
-              <elementProp name="Content-Type" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
-              </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
                 <stringProp name="Header.value">${originSite}/examInfo/${examId}</stringProp>
@@ -713,6 +709,10 @@ vars.put(&quot;userkey&quot;,basic+new String(encryptedUid));</stringProp>
               <elementProp name="Authorization" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">${token}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1824,7 +1824,7 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
       </hashTree>
       <kg.apc.jmeter.threads.SteppingThreadGroup guiclass="kg.apc.jmeter.threads.SteppingThreadGroupGui" testclass="kg.apc.jmeter.threads.SteppingThreadGroup" testname="jp@gc - Stepping Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="ThreadGroup.num_threads">250</stringProp>
+        <stringProp name="ThreadGroup.num_threads">200</stringProp>
         <stringProp name="Threads initial delay">10</stringProp>
         <stringProp name="Start users count">50</stringProp>
         <stringProp name="Start users count burst">0</stringProp>
