@@ -9,27 +9,27 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="examCode" elementType="Argument">
             <stringProp name="Argument.name">examCode</stringProp>
-            <stringProp name="Argument.value">734880</stringProp>
+            <stringProp name="Argument.value">105567</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="site" elementType="Argument">
             <stringProp name="Argument.name">site</stringProp>
-            <stringProp name="Argument.value">172.168.1.187</stringProp>
+            <stringProp name="Argument.value">apirls.512ks.cn</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="originSite" elementType="Argument">
             <stringProp name="Argument.name">originSite</stringProp>
-            <stringProp name="Argument.value">http://172.168.1.187</stringProp>
+            <stringProp name="Argument.value">https://rls.512ks.cn</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="protocol" elementType="Argument">
             <stringProp name="Argument.name">protocol</stringProp>
-            <stringProp name="Argument.value">http</stringProp>
+            <stringProp name="Argument.value">https</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="port" elementType="Argument">
             <stringProp name="Argument.name">port</stringProp>
-            <stringProp name="Argument.value">8080</stringProp>
+            <stringProp name="Argument.value">443</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -40,7 +40,7 @@
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Person Token" enabled="true">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding">gb2312</stringProp>
-        <stringProp name="filename">data/1000p_loc_token.csv</stringProp>
+        <stringProp name="filename">data/token_result.csv</stringProp>
         <boolProp name="quotedData">false</boolProp>
         <boolProp name="recycle">true</boolProp>
         <stringProp name="shareMode">shareMode.all</stringProp>
@@ -1834,15 +1834,15 @@ vars.put(&quot;answers&quot;,results.toString());</stringProp>
       </hashTree>
       <kg.apc.jmeter.threads.SteppingThreadGroup guiclass="kg.apc.jmeter.threads.SteppingThreadGroupGui" testclass="kg.apc.jmeter.threads.SteppingThreadGroup" testname="jp@gc - Stepping Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+        <stringProp name="ThreadGroup.num_threads">300</stringProp>
         <stringProp name="Threads initial delay">10</stringProp>
-        <stringProp name="Start users count">10</stringProp>
+        <stringProp name="Start users count">50</stringProp>
         <stringProp name="Start users count burst">0</stringProp>
-        <stringProp name="Start users period">60</stringProp>
-        <stringProp name="Stop users count">10</stringProp>
+        <stringProp name="Start users period">30</stringProp>
+        <stringProp name="Stop users count">20</stringProp>
         <stringProp name="Stop users period">5</stringProp>
-        <stringProp name="flighttime">60</stringProp>
-        <stringProp name="rampUp">20</stringProp>
+        <stringProp name="flighttime">30</stringProp>
+        <stringProp name="rampUp">50</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
